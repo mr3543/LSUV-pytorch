@@ -122,7 +122,9 @@ def LSUVinit(model,data, needed_std = 1.0, std_tol = 0.1, max_attempts = 10, do_
             model = model.cuda()
     for layer_idx in range(gg['total_fc_conv_layers']):
         print (layer_idx)
+        print('ADDING CURRENT HOOK')
         model.apply(add_current_hook)
+        print('CURRENT HOOK SHOULD BE ADDED')
         out = model(data)
         current_std = gg['act_dict'].std()
         print ('std at layer ',layer_idx, ' = ', current_std)
