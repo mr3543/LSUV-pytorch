@@ -39,12 +39,14 @@ def add_current_hook(m):
         print('HOOK IS NONE')
         return
     if (isinstance(m, nn.Conv2d)) or (isinstance(m, nn.Linear)):
-        print 'trying to hook to', m, gg['hook_position'], gg['done_counter']
+        #print 'trying to hook to', m, gg['hook_position'], gg['done_counter']
+        print('trying to hook module')
         if gg['hook_position'] > gg['done_counter']:
             gg['hook'] = m.register_forward_hook(store_activations)
-            print ' hooking layer = ', gg['hook_position'], m
+            print('hook registered')
+            #print ' hooking layer = ', gg['hook_position'], m
         else:
-            print m, 'already done, skipping'
+            #print m, 'already done, skipping'
             gg['hook_position'] += 1
     else:
         print('HOOK NOT REGISTERED BECAUSE LAYER IS NOT NN CONV OR NN LINEAR')
